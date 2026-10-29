@@ -16,26 +16,143 @@ Faculté des Sciences et Techniques de Settat — Université Hassan I
 ## Exercice 1 — Variables, types et expressions (6 points)
 
 1. Déclarer des variables représentant le nom d'un étudiant, son âge, sa moyenne et son statut d'admission. Choisir un type Dart adapté à chaque donnée.
+   
+void main() {
+  String nom = 'Fatima-Ezzahra';
+  int age = 22;
+  double moyenne = 20.0;
+  bool statut = true;
+
+  print(' Le nom de étudiant est : $nom');
+  print(" L'age de étudiant est  : $age");
+  print(' La moyenne de étudiant est : $moyenne');
+  print(" statut d'admission de étudiant est : $statut");
+  print('la note est : $notes');
+}
+
 2. Déclarer une variable `prixHT` de type `double` et une variable `tva` de type `double`. Calculer le prix TTC avec une TVA de 20 %.
+
+void main() {
+  double prixHT = 200.0;
+  double tva = 0.20;
+  double prixTTC;
+  prixTTC = prixHT + (prixHT * tva);
+  print(prixTTC);
+}
+
 3. Déclarer une liste de cinq notes de type `double`. Afficher la première note, la dernière note et le nombre de notes.
+
+void main() {
+  List notes = [15, 18, 16, 19, 20];
+  print(notes[0]);
+  print(notes(5));
+  
+}
+
 4. Expliquer la différence entre `var`, `final` et `const` à l'aide d'un petit exemple pour chacun.
 5. Écrire un exemple utilisant une variable nullable de type `String?` et l'opérateur `??` pour fournir une valeur par défaut.
 
 ## Exercice 2 — Conditions et énumérations (8 points)
 
 1. Écrire un programme qui lit ou définit un nombre entier et affiche s'il est positif, négatif ou nul.
+
+import 'dart:io';
+
+String Entier(int n) {
+  if (n > 0) {
+    return 'positive';
+  } else if (n < 0) {
+    return 'negative';
+  } else
+    return 'null';
+}
+
+void main() {
+  stdout.write('enter un nombre entier : ');
+  int entier = int.parse(stdin.readLineSync()!);
+  print("le nombre est : ${Entier(entier)}");
+}
+
+
 2. Écrire une fonction `String mention(double moyenne)` qui renvoie :
    - `Très bien` si la moyenne est supérieure ou égale à 16 ;
    - `Bien` si elle est supérieure ou égale à 14 ;
    - `Assez bien` si elle est supérieure ou égale à 12 ;
    - `Passable` si elle est supérieure ou égale à 10 ;
    - `Insuffisant` dans les autres cas.
+  
+import 'dart:io';
+
+String mention(double moyenne) {
+  if (moyenne >= 16) {
+    return "Très bien";
+  } else if (moyenne >= 14) {
+    return "Bien";
+  } else if (moyenne >= 12) {
+    return "Assez bien";
+  } else if (moyenne >= 10) {
+    return "Passable";
+  } else {
+    return "Insuffisant";
+  }
+}
+
+void main() {
+  stdout.write('Entrez votre moyenne : ');
+  double moyenne = double.parse(stdin.readLineSync()!);
+
+  print(mention(moyenne));
+}
+
+
+
+
 3. Écrire une fonction `bool estBissextile(int annee)` qui indique si une année est bissextile. Une année est bissextile si elle est divisible par 400, ou si elle est divisible par 4 mais pas par 100.
+
+
+import 'dart:io';
+
+bool estBissextile(int annee) {
+  if (annee % 400 == 0 || (annee % 4 == 0) && (annee % 100 != 0)) {
+    return true;
+  }
+
+  return false;
+}
+
+void main() {
+  stdout.write('Entrez une annee : ');
+  int annee = int.parse(stdin.readLineSync()!);
+  print(estBissextile(annee));
+}
+
+
 4. Définir `enum Niveau { licence, master, doctorat }`. À l'aide de `switch`, associer à chaque niveau une description (`Bac+3`, `Bac+5` ou `Bac+8`).
 
+
+enum Niveau { licence, master, doctorat }
+
+void main() {
+  Niveau n = Niveau.master;
+  print(n);
+  print(n.name);
+  String texte = switch (n) {
+    Niveau.licence => 'Bac+3',
+    Niveau.master => 'Bac+5',
+    Niveau.doctorat => 'Bac+8',
+  };
+  print(texte);
+}
 ## Exercice 3 — Boucles et calculs (8 points)
 
 1. Afficher les entiers de 1 à 20 avec une boucle `for`.
+
+ void main() {
+  int i;
+  for (i = 1; i <= 20; i++) {
+    print(i);
+  }
+}
 2. Calculer la somme des entiers de 1 à `n`, où `n` est un entier positif.
 3. Afficher la table de multiplication d'un entier `n`, de `1 × n` à `10 × n`.
 4. Écrire une fonction `bool estPremier(int n)` qui renvoie `true` si `n` est premier et `false` sinon. Tester notamment les valeurs `0`, `1`, `2`, `9` et `17`.
@@ -50,12 +167,67 @@ Faculté des Sciences et Techniques de Settat — Université Hassan I
    F = C \times 1{,}8 + 32
    \]
 
-2. Écrire `int carre(int x)` sous forme classique avec `return`, puis sous forme fléchée avec `=>`.
-3. Écrire `void saluer(String nom)` qui affiche un message de bienvenue. Appeler cette fonction pour trois noms différents.
-4. Écrire `String creerMessage({required String nom, int age = 18})`. La fonction doit renvoyer un message contenant le nom et l'âge. Tester un appel avec l'âge par défaut et un appel avec un âge fourni.
-5. Écrire `double prixTTC({required double prixHT, double tva = 0.20})`. Calculer le prix TTC avec la TVA par défaut, puis avec une TVA de 10 %.
-6. Écrire une fonction récursive `int factorielle(int n)`. Traiter le cas de base et tester les valeurs de 0 à 6.
-7. Expliquer la différence entre un paramètre et un argument à partir d'un appel à `carre(5)`.
+
+   import "dart:io";
+
+double celsiusVersFahrenheit(double c) {
+  return (c * 1.8) + 32;
+}
+
+void main() {
+  stdout.write('donner une valeur a c : ');
+  double c = double.parse(stdin.readLineSync()!);
+  print(celsiusVersFahrenheit(c));
+}
+
+
+3. Écrire `int carre(int x)` sous forme classique avec `return`, puis sous forme fléchée avec `=>`.
+
+   int carre(int x) => x * x;
+void main() {
+  print(carre(5));
+}
+
+5. Écrire `void saluer(String nom)` qui affiche un message de bienvenue. Appeler cette fonction pour trois noms différents.
+
+String saluer(String nom) {
+  return 'bienvenue $nom';
+}
+
+void main() {
+  print(saluer('Fatima-Ezzahra'));
+  print(saluer('sara'));
+  print(saluer('ILYES'));
+}
+
+
+6. Écrire `String creerMessage({required String nom, int age = 18})`. La fonction doit renvoyer un message contenant le nom et l'âge. Tester un appel avec l'âge par défaut et un appel avec un âge fourni.
+
+String creerMessage({required String nom, int age = 18}) {
+  return '$nom , $age';
+}
+
+void main() {
+  print(creerMessage(nom: 'Fatima-Ezzahra'));
+  print(creerMessage(nom: 'Fatima-Ezzahra', age: 22));
+}
+
+
+
+7. Écrire `double prixTTC({required double prixHT, double tva = 0.20})`. Calculer le prix TTC avec la TVA par défaut, puis avec une TVA de 10 %.
+
+double prixTTC({required double prixHT, double tva = 0.20}) {
+  return prixHT + (prixHT * tva);
+}
+
+void main() {
+  print(prixTTC(prixHT: 50));
+  print(prixTTC(prixHT: 50, tva: 0.10));
+}
+
+
+8. Écrire une fonction récursive `int factorielle(int n)`. Traiter le cas de base et tester les valeurs de 0 à 6.
+9. Expliquer la différence entre un paramètre et un argument à partir d'un appel à `carre(5)`.
 
 ## Exercice 5 — Traitement des listes (8 points)
 
